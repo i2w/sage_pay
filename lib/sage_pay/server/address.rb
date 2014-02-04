@@ -16,10 +16,11 @@ module SagePay
       validates_format_of :phone, :with => PHONE_FORMAT
 
       validates_length_of :first_names, :surname, :maximum => 20
-      validates_length_of :address_1, :address_2, :maximum => 100
+      validates_length_of :address_1, :maximum => 100
+      validates_length_of :address_2, :maximum => 100, :allow_blank => true
       validates_length_of :city, :maximum => 40
       validates_length_of :post_code, :maximum => 10
-      validates_length_of :phone, :maximum => 20
+      validates_length_of :phone, :maximum => 20, :allow_blank => true
 
       # While the spec specifies the lengths of these columns, we're
       # validating that they're included in our list, and our list only
