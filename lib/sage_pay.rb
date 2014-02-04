@@ -1,14 +1,12 @@
-require 'active_support/core_ext/class'
+require 'active_record'
+ActiveRecord.load_all!
+
 require 'bigdecimal'
 require 'net/https'
 require 'uri'
 require 'digest/md5'
 require 'uuid'
-
-require 'active_model/naming'
-require 'active_model/validator'
-require 'active_model/validations'
-require 'active_model/translation'
+require 'i18n'
 
 module SagePay
 end
@@ -17,6 +15,7 @@ require 'sage_pay/version'
 require 'sage_pay/uri_fixups'
 require 'sage_pay/locale_initializer'
 require 'sage_pay/validators'
+require 'sage_pay/server/model'
 require 'sage_pay/server/address'
 require 'sage_pay/server/transaction_code'
 require 'sage_pay/server/signature_verification_details'

@@ -1,7 +1,6 @@
 module SagePay
   module Server
-    class Address
-      include ActiveModel::Validations
+    class Address < Model
       include SagePay::Validators
 
       attr_accessor :first_names, :surname, :address_1, :address_2, :city,
@@ -33,14 +32,8 @@ module SagePay
       # The state's presence is required if the country is the US, and
       # verboten otherwise.
 
-      validates :state, :presence => {:message => "is required if the country is US"}, :if => :in_us?
+      validates_presence_of :state, :message => "is required if the country is US", :if => :in_us?
       validates_inclusion_of :state, :in => ['', nil], :message => "is present but the country is not US", :unless => :in_us?
-
-      def initialize(attributes = {})
-        attributes.each do |k, v|
-          send("#{k}=", v)
-        end
-      end
 
       def in_us?
         country == "US"

@@ -1,8 +1,6 @@
 module SagePay
   module Server
-    class Command
-      include ActiveModel::Validations
-
+    class Command < Model
       class_attribute :tx_type, :vps_protocol
 
       self.vps_protocol = "2.23"
@@ -24,12 +22,6 @@ module SagePay
           define_method("#{attr}=") do |value|
             instance_variable_set("@#{attr}", value.blank? ? nil : BigDecimal.new(value.to_s))
           end
-        end
-      end
-
-      def initialize(attributes = {})
-        attributes.each do |k, v|
-          send("#{k}=", v)
         end
       end
 

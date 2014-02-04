@@ -1,4 +1,5 @@
 require 'rubygems'
+require 'spec/autorun'
 
 if ENV['COVERAGE'] && RUBY_VERSION >= '1.9'
   require 'simplecov'
@@ -29,7 +30,12 @@ require 'sage_pay'
 # in ./support/ and its subdirectories.
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
-RSpec.configure do |config|
+Spec::Runner.configure do |config|
   config.include(Factories)
   config.include(ValidationMatchers)
 end
+
+# RSpec.configure do |config|
+#   config.include(Factories)
+#   config.include(ValidationMatchers)
+# end

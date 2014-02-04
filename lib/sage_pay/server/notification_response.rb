@@ -1,8 +1,6 @@
 module SagePay
   module Server
-    class NotificationResponse
-      include ActiveModel::Validations
-
+    class NotificationResponse < Model
       attr_accessor :status, :status_detail, :redirect_url
 
       validates_presence_of :status, :redirect_url
@@ -12,12 +10,6 @@ module SagePay
       validates_length_of :status_detail, :maximum => 255
 
       validates_inclusion_of :status, :allow_blank => true, :in => [ :ok, :invalid, :error ]
-
-      def initialize(attributes = {})
-        attributes.each do |k, v|
-          send("#{k}=", v)
-        end
-      end
 
       def ok?
         status == :ok
